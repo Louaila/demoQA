@@ -5,7 +5,7 @@ import { Link } from '../pages/page.link';
 import { Form } from '../pages/page.form'
 import { Widgets } from '../pages/widgets'
 import { Dynamic } from '../pages/dynamic.properties';
-import { text } from 'stream/consumers';
+import { Book } from '../pages/book.store';
 
 
 
@@ -61,3 +61,18 @@ test('changer color dynamique', async ({ page }) => {
   await dynamic.changeColor();
 
 });
+
+
+
+
+test('add user ', async ({ page }) => {
+  
+
+  const accueil = new Accueil(page)
+  const book = new Book(page);
+ 
+  await accueil.navigateto();
+  await book.createUser();
+
+});
+
