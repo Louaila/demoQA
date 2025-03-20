@@ -18,7 +18,7 @@ export class Widgets {
 
         
         await this.page.locator('#toolTipButton').hover();
-        await expect(this.page.getByText('You hovered over the Button')).toBeVisible();
+        await expect(this.page.getByText('You hovered over the Button')).toBeVisible({ timeout: 1000 });
 
 
         const hoverTextbox = this.page.getByRole('textbox', { name: 'Hover me to see' });
@@ -38,11 +38,10 @@ export class Widgets {
     }        
 
     
-       
+    
 
      async selectmenu(){
 
-        await this.page.locator('div:nth-child(4) > div > .card-up').click();
         await this.page.getByText('Widgets').click();
         await this.page.getByText('Select Menu').click();
 

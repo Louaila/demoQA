@@ -4,6 +4,8 @@ import {Accueil}  from '../pages/accueil'
 import { Link } from '../pages/page.link';
 import { Form } from '../pages/page.form'
 import { Widgets } from '../pages/widgets'
+import { Dynamic } from '../pages/dynamic.properties';
+import { text } from 'stream/consumers';
 
 
 
@@ -45,5 +47,17 @@ test('verifier les hover', async ({ page }) => {
   await accueil.navigateto();
   await widgets.hoverTexte();
   await widgets.selectmenu();
+
+});
+
+
+test('changer color dynamique', async ({ page }) => {
+  
+
+  const accueil = new Accueil(page)
+  const dynamic = new Dynamic(page);
+ 
+  await accueil.navigateto();
+  await dynamic.changeColor();
 
 });
