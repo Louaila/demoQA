@@ -3,7 +3,7 @@ import { Element } from '../pages/accueil.element';
 import {Accueil}  from '../pages/accueil'
 import { Link } from '../pages/page.link';
 import { Form } from '../pages/page.form'
-import{Widjets} from '../pages/widgets'
+import { Widgets } from '../pages/widgets'
 
 
 
@@ -40,9 +40,10 @@ test('verifier les hover', async ({ page }) => {
   
 
   const accueil = new Accueil(page)
-  const widjets = new Widjets(page)
+  const widgets = new Widgets(page);
  
   await accueil.navigateto();
-  await widjets.hover();
+  await widgets.hoverTexte();
+  await widgets.selectmenu();
 
 });
