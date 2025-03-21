@@ -1,44 +1,41 @@
-import { Page , expect} from '@playwright/test';
+import { Page , expect,Locator} from '@playwright/test';
 import {USER_DATA} from '../contants/user.constants';
 
 
 export class Book {
     readonly page: Page;
+    readonly firstNameField: Locator;
+    readonly lastNameField: Locator;
+    readonly userNameField: Locator;
+    readonly passwordField: Locator;
+    readonly registerButton: Locator;
+
     constructor(page: Page) {
         this.page = page;
+        this.firstNameField = page.getByRole('textbox', { name: 'First Name' });
+        this.lastNameField = page.getByRole('textbox', { name: 'Last Name' });
+        this.userNameField = page.getByRole('textbox', { name: 'UserName' });
+        this.passwordField = page.getByRole('textbox', { name: 'Password' });
+        this.registerButton = page.getByRole('button', { name: 'Register' });
     }
-    
-    async createUser() {
+
+    async createUser(userData = USER_DATA) {
         await this.page.locator('div:nth-child(6) > div > .card-up').click();
         await this.page.getByText('Profile').click();
         await this.page.getByRole('link', { name: 'register' }).click();
 
-        const firstNameField = this.page.getByRole('textbox', { name: 'First Name' });
-        const lastNameField = this.page.getByRole('textbox', { name: 'Last Name' });
-        const userNameField = this.page.getByRole('textbox', { name: 'UserName' });
-        const passwordField = this.page.getByRole('textbox', { name: 'Password' });
+        await this.firstNameField.fill(userData.firstName);
+        await this.lastNameField.fill(userData.lastName);
+        await this.userNameField.fill(userData.userName);
+        await this.passwordField.fill(userData.password);
 
-        
-        await firstNameField.fill(USER_DATA.firstName);
-        await lastNameField.fill(USER_DATA.lastName);
-        await userNameField.fill(USER_DATA.userName);
-        await passwordField.fill(USER_DATA.password);
-
-
-       
         const frame = this.page.frameLocator("iframe[title='reCAPTCHA']");
         const label = frame.locator("#recaptcha-anchor");
         await this.page.waitForTimeout(1000);
         await expect(label).toBeVisible();
         await label.click();
-        
 
-        
-       
-
-        await this.page.getByRole('button', { name: 'Register' }).click();
-
-    
+        await this.registerButton.click();
     }
 }
 
@@ -49,4 +46,3 @@ export class Book {
 
 
 
-   

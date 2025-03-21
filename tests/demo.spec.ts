@@ -6,6 +6,7 @@ import { Form } from '../pages/page.form'
 import { Widgets } from '../pages/widgets'
 import { Dynamic } from '../pages/dynamic.properties';
 import { Book } from '../pages/book.store';
+import { Radio } from '../pages/radio';
 
 
 
@@ -29,8 +30,23 @@ test('remplir le form', async ({ page }) => {
   const accueil = new Accueil(page)
   const form = new Form(page)
  
+  const formData = {
+    firstName: 'Louaila',
+    lastName: 'Touama',
+    email: 'lou591@hotmail.fr',
+    gender: 'Female',
+    mobileNumber: '0614101245',
+    dateOfBirth: 'Thursday, March 20th',
+    hobbies: ['Sports', 'Reading', 'Music'],
+    currentAddress: '46 rue vallon',
+    state: 'NCR',
+    city: 'Delhi',
+};
+
+
+
   await accueil.navigateto();
-  await form.remplirForm();
+  await form.remplirForm(formData);
 
 });
 
@@ -61,6 +77,16 @@ test('add user ', async ({ page }) => {
  
   await accueil.navigateto();
   await book.createUser();
+
+});
+
+
+test('cliquer ', async ({ page }) => {
+  const accueil = new Accueil(page)
+  const radio = new Radio(page);
+ 
+  await accueil.navigateto();
+  await radio.cliquerRadioButton();
 
 });
 
