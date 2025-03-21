@@ -8,7 +8,17 @@ export class Link {
         this.page = page;
     }
 
-    async cliquerelink() {
+    async goSexionLink() {
+        await this.page.locator('.card-up').first().click();
+
+        //  ALLER SUR link
+        await this.page.getByRole('listitem').filter({ hasText: /^Links$/ }).click();
+        await expect(this.page.getByText('Following links will open new')).toBeVisible();
+    }
+
+
+
+    async hover() {
         await this.page.getByRole('link', { name: 'Created' }).click();
         await expect(this.page.getByText('Created')).toBeVisible();
 
