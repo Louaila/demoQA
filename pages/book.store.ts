@@ -1,5 +1,5 @@
-import { Page } from '@playwright/test';
-
+import { Page , expect} from '@playwright/test';
+import {USER_DATA} from '../contants/user.constants';
 
 
 export class Book {
@@ -18,11 +18,35 @@ export class Book {
         const userNameField = this.page.getByRole('textbox', { name: 'UserName' });
         const passwordField = this.page.getByRole('textbox', { name: 'Password' });
 
-        await firstNameField.fill('louaila');
-        await lastNameField.fill('touama');
-        await userNameField.fill('touama');
-        await passwordField.fill('12345678');
+        
+        await firstNameField.fill(USER_DATA.firstName);
+        await lastNameField.fill(USER_DATA.lastName);
+        await userNameField.fill(USER_DATA.userName);
+        await passwordField.fill(USER_DATA.password);
+
+
+       
+        const frame = this.page.frameLocator("iframe[title='reCAPTCHA']");
+        const label = frame.locator("#recaptcha-anchor");
+        await this.page.waitForTimeout(1000);
+        await expect(label).toBeVisible();
+        await label.click();
+        
+
+        
+       
 
         await this.page.getByRole('button', { name: 'Register' }).click();
+
+    
     }
 }
+
+
+
+
+
+
+
+
+   

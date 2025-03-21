@@ -25,10 +25,7 @@ test('cliquer sur element', async ({ page }) => {
 });
 
 
-
-
 test('remplir le form', async ({ page }) => {
-  
   const accueil = new Accueil(page)
   const form = new Form(page)
  
@@ -39,8 +36,6 @@ test('remplir le form', async ({ page }) => {
 
 
 test('verifier les hover', async ({ page }) => {
-  
-
   const accueil = new Accueil(page)
   const widgets = new Widgets(page);
  
@@ -50,24 +45,17 @@ test('verifier les hover', async ({ page }) => {
 
 });
 
-
 test('changer color dynamique', async ({ page }) => {
+    const accueil = new Accueil(page);
+    const dynamic = new Dynamic(page);
   
-
-  const accueil = new Accueil(page)
-  const dynamic = new Dynamic(page);
- 
-  await accueil.navigateto();
-  await dynamic.changeColor();
+    await accueil.navigateto();
+    await dynamic.changeColor();
 
 });
 
 
-
-
 test('add user ', async ({ page }) => {
-  
-
   const accueil = new Accueil(page)
   const book = new Book(page);
  
